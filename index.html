@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube Multiview_6</title>
+
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .video-wrapper {
+            float: left;
+            width: 33%;
+            padding: 1px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .text-box {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 3px;
+            box-sizing: border-box;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: linear-gradient(to bottom, #f2f2f2, #d9d9d9);
+            color: black;
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .video-wrapper {
+                width: calc(50% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    const apiKey       = 'AIzaSyAAlz4Qbvkh5rvr-Ffwdt1RbsaqC4HqCVw';
+    const videoIds     = ['NJUjU9ALj4A', 'lb1oB2feqkQ', 'yhpbioCP6nA', 's9xL1DpBsfQ', '5cFoz90FUMk'];
+    const channelId6   = 'UCgJ5pT6S2NuTVP-6-AlLZew';
+    const names        = ['한국경제TV','MTN','연합뉴스경제','매일경제TV','이데일리TV','토마토TV'];
+    const elementIds   = ['realTimeViewers1','realTimeViewers2','realTimeViewers3','realTimeViewers4','realTimeViewers5','realTimeViewers6'];
+
+    function addCommasToNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function fetchRealTimeViewers(videoId, elementId, videoName) {
+        fetch(`https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${videoId}&key=${apiKey}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.items && data.items[0] && data.items[0].liveStreamingDetails) {
+                    const viewers = data.items[0].liveStreamingDetails.concurrentViewers;
+                    document.getElementById(elementId).innerText = `${videoName}: ${addCommasToNumber(viewers)}명`;
+                } else {
+                    document.getElementById(elementId).innerText = `${videoName}: undefined`;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching viewers:', error);
+                document.getElementById(elementId).innerText = `${videoName}: undefined`;
+            });
+    }
+
+    function fetchLiveChannelViewer(channelId, elementId, videoName) {
+        // 채널의 현재 라이브 스트림 비디오 ID 검색
+        fetch(`https://www.googleapis.com/youtube/v3/search?part=id&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.items && data.items.length > 0) {
+                    const liveVideoId = data.items[0].id.videoId;
+                    fetchRealTimeViewers(liveVideoId, elementId, videoName);
+                } else {
+                    // 라이브 방송 없음
+                    document.getElementById(elementId).innerText = `${videoName}: undefined`;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching live search:', error);
+                document.getElementById(elementId).innerText = `${videoName}: undefined`;
+            });
+    }
+
+    function updateAll() {
+        // 1~5번 고정 비디오
+        for (let i = 0; i < videoIds.length; i++) {
+            fetchRealTimeViewers(videoIds[i], elementIds[i], names[i]);
+        }
+        // 6번 채널 라이브
+        fetchLiveChannelViewer(channelId6, elementIds[5], names[5]);
+    }
+
+    // 최초 조회
+    updateAll();
+    // 60초마다 갱신
+    setInterval(updateAll, 60000);
+</script>
+
+<!-- YouTube Videos -->
+<div class="video-wrapper">
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/NJUjU9ALj4A?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="text-box" id="realTimeViewers1"></div>
+</div>
+
+<div class="video-wrapper">
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/lb1oB2feqkQ?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="text-box" id="realTimeViewers2"></div>
+</div>
+
+<div class="video-wrapper">
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/yhpbioCP6nA?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="text-box" id="realTimeViewers3"></div>
+</div>
+
+<div class="video-wrapper">
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/s9xL1DpBsfQ?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="text-box" id="realTimeViewers4"></div>
+</div>
+
+<div class="video-wrapper">
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/5cFoz90FUMk?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="text-box" id="realTimeViewers5"></div>
+</div>
+
+<!-- 6: 토마토TV (채널 라이브 스트림) -->
+<div class="video-wrapper">
+    <div class="video-container">
+        <iframe
+            src="https://www.youtube.com/embed/live_stream?channel=UCgJ5pT6S2NuTVP-6-AlLZew&autoplay=1&mute=1"
+            frameborder="0" allowfullscreen>
+        </iframe>
+    </div>
+    <div class="text-box" id="realTimeViewers6"></div>
+</div>
+
+</body>
+</html>
