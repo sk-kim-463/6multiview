@@ -50,11 +50,14 @@
 <body>
 
 <script>
-    const apiKey       = 'AIzaSyAAlz4Qbvkh5rvr-Ffwdt1RbsaqC4HqCVw';
-    const videoIds     = ['NJUjU9ALj4A', 'lb1oB2feqkQ', 'yhpbioCP6nA', 's9xL1DpBsfQ', '5cFoz90FUMk'];
-    const channelId6   = 'UCgJ5pT6S2NuTVP-6-AlLZew';
-    const names        = ['한국경제TV','MTN','연합뉴스경제','매일경제TV','이데일리TV','토마토TV'];
-    const elementIds   = ['realTimeViewers1','realTimeViewers2','realTimeViewers3','realTimeViewers4','realTimeViewers5','realTimeViewers6'];
+    const apiKey     = 'AIzaSyAAlz4Qbvkh5rvr-Ffwdt1RbsaqC4HqCVw';
+    const videoIds   = ['NJUjU9ALj4A', 'lb1oB2feqkQ', 'yhpbioCP6nA', 's9xL1DpBsfQ', '5cFoz90FUMk'];
+    const channelId6 = 'UCgJ5pT6S2NuTVP-6-AlLZew';
+    const names      = ['한국경제TV','MTN','연합뉴스경제','매일경제TV','이데일리TV','토마토TV'];
+    const elementIds = ['realTimeViewers1','realTimeViewers2','realTimeViewers3','realTimeViewers4','realTimeViewers5','realTimeViewers6'];
+
+    let isLiveLoaded = false;   // 처음만 로드
+    let currentLiveVideoId = null;
 
     function addCommasToNumber(number) {
         return number ? number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "0";
@@ -62,11 +65,12 @@
 
     function fetchRealTimeViewers(videoId, elementId, videoName) {
         fetch(`https://www.googleapis.com/youtube/v3/videos?part=liveStreamingDetails&id=${videoId}&key=${apiKey}`)
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
                 if (data.items && data.items[0] && data.items[0].liveStreamingDetails) {
                     const viewers = data.items[0].liveStreamingDetails.concurrentViewers;
-                    document.getElementById(elementId).innerText = `${videoName}: ${addCommasToNumber(viewers)}명`;
+                    document.getElementById(elementId).innerText =
+                        `${videoName}: ${addCommasToNumber(viewers)}명`;
                 } else {
                     document.getElementById(elementId).innerText = `${videoName}: 방송중 아님`;
                 }
@@ -78,18 +82,22 @@
 
     function fetchLiveChannelViewer(channelId, elementId, videoName) {
         fetch(`https://www.googleapis.com/youtube/v3/search?part=id&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`)
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
                 if (data.items && data.items.length > 0) {
                     const liveVideoId = data.items[0].id.videoId;
 
-                    // iframe에 라이브 영상 교체
-                    document.getElementById("iframe6").src =
-                        `https://www.youtube.com/embed/${liveVideoId}?autoplay=1&mute=1`;
+                    // 영상 ID가 처음 발견되거나 바뀐 경우에만 iframe 로드
+                    if (!isLiveLoaded || currentLiveVideoId !== liveVideoId) {
+                        document.getElementById("iframe6").src =
+                            `https://www.youtube.com/embed/${liveVideoId}?autoplay=1&mute=1`;
+
+                        currentLiveVideoId = liveVideoId;
+                        isLiveLoaded = true;
+                    }
 
                     fetchRealTimeViewers(liveVideoId, elementId, videoName);
                 } else {
-                    document.getElementById("iframe6").src = "";
                     document.getElementById(elementId).innerText = `${videoName}: 방송중 아님`;
                 }
             })
@@ -109,7 +117,8 @@
     setInterval(updateAll, 30000);
 </script>
 
-<!-- YouTube Videos -->
+
+<!-- 영상 6개 UI -->
 <div class="video-wrapper">
     <div class="video-container">
         <iframe src="https://www.youtube.com/embed/NJUjU9ALj4A?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
@@ -145,7 +154,6 @@
     <div class="text-box" id="realTimeViewers5"></div>
 </div>
 
-<!-- 6: 토마토TV (동적 라이브 ID 적용) -->
 <div class="video-wrapper">
     <div class="video-container">
         <iframe id="iframe6" frameborder="0" allowfullscreen></iframe>
