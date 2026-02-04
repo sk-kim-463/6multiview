@@ -72,9 +72,9 @@
                     document.getElementById(elementId).innerText =
                         `${videoName}: ${addCommasToNumber(viewers)}명`;
                 } else {
-                    document.getElementById(elementId).innerText = `${videoName}: 방송중 아님`;
+                    document.getElementById(elementId).innerText = `${videoName}: `점검중`;
                 }
-            })
+            }
             .catch(() => {
                 document.getElementById(elementId).innerText = `${videoName}: 오류`;
             });
@@ -98,7 +98,7 @@
 
                     fetchRealTimeViewers(liveVideoId, elementId, videoName);
                 } else {
-                    document.getElementById(elementId).innerText = `${videoName}: 점검중`;
+                    document.getElementById(elementId).innerText = `${videoName}: `점검중`;
                 }
             })
             .catch(() => {
