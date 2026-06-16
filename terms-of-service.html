@@ -1,16 +1,149 @@
-[YouTube API 연동 시스템 이용자 준수사항]
-본 모니터링 시스템은 YouTube API Services를 기반으로 운영되며, 시스템을 이용하는 임직원은 다음 사항을 반드시 준수해야 합니다.
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서비스 약관 (Terms of Service)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .date-info {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 30px 0;
+        }
+        h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #000;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-left: 4px solid #333;
+            padding-left: 10px;
+        }
+        .lang-block {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+        }
+        .lang-block.kr {
+            background-color: #fff;
+            border-left: 1px dashed #ccc;
+            border-radius: 0;
+        }
+        strong.label {
+            display: inline-block;
+            min-width: 35px;
+            color: #0066cc;
+            font-weight: bold;
+        }
+        .kr strong.label {
+            color: #cc3300;
+        }
+        ul {
+            margin: 5px 0 0 0;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #004499;
+        }
+        .footer-date {
+            margin-top: 50px;
+            text-align: right;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
 
-YouTube 약관 준수: 모든 이용자는 본 시스템을 이용함에 있어 YouTube 서비스 약관을 철저히 준수해야 합니다.
+    <h1>서비스 약관 (Terms of Service)</h1>
+    <div class="date-info"><strong>Effective Date / 시행일자:</strong> June 16, 2026</div>
 
-데이터 오남용 및 외부 유출 금지: API를 통해 제공되는 실시간 방송 데이터 및 시청 지표는 사내 모니터링 목적으로만 사용되어야 하며, 인가되지 않은 외부 제3자에게 유출하거나 무단 복제·가공할 수 없습니다.
+    <hr>
 
-우회 조작 금지: 시스템의 정상적인 모니터링 기능을 임의로 변경하거나 구글의 보안 정책을 우회하려는 시도를 금지합니다.
+    <h3>1. Overview / 개요</h3>
+    <div class="lang-block en">
+        <strong class="label">EN:</strong> These Terms of Service ("Terms") govern the access and use of the internal monitoring and data analytics system (the "Service") operated by Korea Economic TV. This Service utilizes YouTube API Services to monitor broadcasting statuses.
+    </div>
+    <div class="lang-block kr">
+        <strong class="label">KR:</strong> 본 서비스 약관(이하 "약관")은 한국경제TV가 운영하는 내부 방송 모니터링 및 데이터 분석 시스템(이하 "서비스")의 이용 조건을 규정합니다. 본 서비스는 방송 송출 상태를 관리하기 위해 YouTube API 서비스를 활용합니다.
+    </div>
 
-[Terms of Use for YouTube API-Integrated System]
+    <h3>2. Compliance with YouTube Terms of Service / YouTube 서비스 약관 준수</h3>
+    <div class="lang-block en">
+        <strong class="label">EN:</strong> 
+        <ul>
+            <li><strong>Mandatory Compliance:</strong> By accessing or using this Service, all authorized internal personnel must strictly adhere to the official <a href="https://www.youtube.com/t/terms" target="_blank">YouTube Terms of Service</a>.</li>
+            <li><strong>Prohibition of Violation:</strong> Any actions that breach Google or YouTube developer policies, or circumvent technical protections, are strictly prohibited.</li>
+        </ul>
+    </div>
+    <div class="lang-block kr">
+        <strong class="label">KR:</strong> 
+        <ul>
+            <li><strong>필수 준수 의무:</strong> 본 서비스를 이용하는 모든 인가된 내부 임직원은 구글이 규정한 공식 <a href="https://www.youtube.com/t/terms" target="_blank">YouTube 서비스 약관</a>을 철저히 준수해야 합니다.</li>
+            <li><strong>위반 행위 금지:</strong> YouTube 서비스 약관 및 개발자 정책을 위반하거나, 시스템의 기술적 보호조치를 우회하는 모든 행위는 엄격히 금지됩니다.</li>
+        </ul>
+    </div>
 
-Compliance with YouTube ToS: All authorized users must strictly adhere to the YouTube Terms of Service while utilizing this system.
+    <h3>3. Internal Use and Data Protection / 내부 목적 한정 및 데이터 보호</h3>
+    <div class="lang-block en">
+        <strong class="label">EN:</strong> All real-time metadata (such as concurrent viewer metrics) retrieved through the YouTube API is meant solely for secure in-house monitoring and content quality management. Unauthorized leakage, duplication, or transmission of this data to any third-party external entities is strictly forbidden.
+    </div>
+    <div class="lang-block kr">
+        <strong class="label">KR:</strong> YouTube API를 통해 조회된 모든 실시간 메타데이터(시청자 수 등)는 오직 사내 모니터링 및 방송 품질 개선 목적으로만 사용되어야 합니다. 인가되지 않은 외부 제3자에게 데이터를 유출, 복제 또는 전송하는 행위는 절대 불가합니다.
+    </div>
 
-Prohibition of Data Leakage: Real-time broadcasting data and performance metrics accessed through this system must be used solely for internal monitoring purposes. Storing, duplicating, or transferring this data to unauthorized third parties is strictly prohibited.
+    <h3>4. User Revocation of Data Access / 데이터 접근 권한 철회</h3>
+    <div class="lang-block en">
+        <strong class="label">EN:</strong> This Service utilizes public data and maintains no server-side databases. Users can manage or revoke the Service's data access permissions at any time via the official <a href="https://myaccount.google.com/permissions" target="_blank">Google Security Settings</a> page.
+    </div>
+    <div class="lang-block kr">
+        <strong class="label">KR:</strong> 본 서비스는 공개된 데이터를 사용하며 백엔드 DB를 운영하지 않습니다. 본 서비스에 대한 데이터 접근 권한은 언제든지 공식 <a href="https://myaccount.google.com/permissions" target="_blank">Google 보안 설정</a> 페이지를 통해 직접 철회하거나 관리할 수 있습니다.
+    </div>
 
-No Circumvention: Users shall not alter the system functions or attempt to circumvent Google's security guidelines.
+    <h3>5. Limitations of Liability / 책임의 한계</h3>
+    <div class="lang-block en">
+        <strong class="label">EN:</strong> The Service provides real-time streaming statistics on an "as-is" and "as-available" basis using the YouTube API infrastructure. The Service is not liable for temporary data discrepancies or connection interruptions caused by API network outages.
+    </div>
+    <div class="lang-block kr">
+        <strong class="label">KR:</strong> 본 서비스는 YouTube API 인프라를 바탕으로 실시간 방송 통계를 있는 그대로 제공합니다. API 네트워크의 일시적 장애나 글로벌 서버 중단으로 인해 발생한 일시적인 데이터 불일치 또는 접속 지연에 대해 본 서비스는 책임을 지지 않습니다.
+    </div>
+
+    <div class="footer-date">
+        <strong>Publication Date / 공고일자:</strong> June 16, 2026 (2026년 6월 16일)<br>
+        <strong>Enforcement Date / 시행일자:</strong> June 16, 2026 (2026년 6월 16일)
+    </div>
+
+</body>
+</html>
