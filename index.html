@@ -101,7 +101,7 @@
     // 초기 로드 시 1회 일괄 요청
     fetchAllRealTimeViewers();
 
-    // 30초마다 1회 일괄 요청 (할당량 대폭 절약)
+    // 15초마다 1회 일괄 요청
     setInterval(() => {
         fetchAllRealTimeViewers();
     }, 15000);
@@ -154,7 +154,10 @@
 <div style="clear: both; display: block; width: 100%; text-align: center; padding: 30px 0; margin-top: 50px; border-top: 1px solid #d9d9d9;">
     <p style="color: #666; font-size: 13px; margin: 5px 0;">© 2026 6multiview. All rights reserved.</p>
     <p style="margin: 5px 0;">
-        <a href="privacy.html" target="_blank" style="color: #0066cc; text-decoration: none; font-weight: bold; font-size: 14px;">개인정보처리방침 (Privacy Policy)</a>
+        <!-- 개인정보처리방침과 서비스약관을 나란히 배치하여 가독성을 높였습니다 -->
+        <a href="privacy.html" target="_blank" style="color: #0066cc; text-decoration: none; font-weight: bold; font-size: 14px; margin-right: 15px;">개인정보처리방침 (Privacy Policy)</a>
+        <span style="color: #ccc;">|</span>
+        <a href="terms-of-service.html" target="_blank" style="color: #0066cc; text-decoration: none; font-weight: bold; font-size: 14px; margin-left: 15px;">서비스 약관 (Terms of Service)</a>
     </p>
 </div>
 
